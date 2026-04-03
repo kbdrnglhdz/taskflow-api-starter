@@ -1,0 +1,53 @@
+name: Opencode PR Review
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Opencode
+        run: curl -fsSL https://opencode.ai/install | bash
+
+      - name: Get changed files
+        id: changed-files
+        run: |
+          git fetch origin main
+          FILES=$(git diff --name-only origin/main...HEAD | tr '\n' ' ')
+          echo "files=$FILES" >> $GITHUB_OUTPUT
+
+      - name: Run Opencode review
+        if: steps.changed-files.outputs.files != ''
+        env:
+          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+        run: |
+          opencode run --agent taskflow-reviewer --files ${{ steps.changed-files.outputs.files }} > review.txt
+          cat review.txt
+
+      - name: Comment PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const review = fs.existsSync('review.txt') ? fs.readFileSync('review.txt', 'utf8') : 'No se encontraron archivos modificados para revisar.';
+            const body = `## 🤖 Revisión automática de Opencode\n\n${review}`;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });

@@ -1,0 +1,3 @@
+#!/bin/sh
+# Hook de pre-commit para ejecutar lint con Opencode
+opencode skill lint

@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "edit": "ask",
+    "bash": "deny",
+    "read": "allow"
+  },
+  "agents": {
+    "default": "AGENTS.md"
+  },
+  "skills": {
+    "path": ".opencode/skills"
+  },
+  "commands": {
+    "path": ".opencode/commands"
+  }
+}

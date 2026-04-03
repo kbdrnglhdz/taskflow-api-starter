@@ -1,0 +1,11 @@
+{
+  "sesion_actual": 5,
+  "paso_actual": 4,
+  "completado": {
+    "sesion1": true,
+    "sesion2": true,
+    "sesion3": true,
+    "sesion4": true,
+    "sesion5": true
+  }
+}
