@@ -22,27 +22,25 @@ Este skill analiza el historial de Git desde el tag más reciente (o desde el pr
 ## [No publicado] - Fecha actual
 
 ### Añadido
-
 - feat: descripción del commit (autor @username)
 
 ### Corregido
-
 - fix: descripción
 
 ### Cambiado
-
 - refactor: descripción
 
 ### Eliminado
 - ...
+
 ### Documentación
-
 - docs: ...
-### Pruebas
 
+### Pruebas
 - test: ...
 
 ### Mantenimiento
+
 - chore: ...
 4. Si el archivo ya existe, fusiona los nuevos cambios al principio (sección [No publicado]). No elimines secciones anteriores.
 5. Escribe el archivo con codificación UTF-8.
