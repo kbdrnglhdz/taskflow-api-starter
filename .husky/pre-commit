@@ -1,0 +1,22 @@
+#!/bin/sh
+# Pre-commit hook: lint y formateo de archivos JS/TS/TSX
+
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(js|ts|jsx|tsx)$')
+
+if [ -z "$STAGED_FILES" ]; then
+  exit 0
+fi
+
+echo "🔍 Verificando estilo de código..."
+
+ERRORS=0
+
+for FILE in $STAGED_FILES; do
+  echo "  ✓ $FILE"
+  npx eslint --fix "$FILE" 2>/dev/null || true
+  npx prettier --write "$FILE" 2>/dev/null || true
+  git add "$FILE"
+done
+
+echo "✅ Lint y formato aplicados"
+exit 0

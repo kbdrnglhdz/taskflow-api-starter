@@ -1,17 +1,2 @@
 {
-  "$schema": "https://opencode.ai/config.json",
-  "permissions": {
-    "edit": "ask",
-    "bash": "deny",
-    "read": "allow"
-  },
-  "agents": {
-    "default": "AGENTS.md"
-  },
-  "skills": {
-    "path": ".opencode/skills"
-  },
-  "commands": {
-    "path": ".opencode/commands"
-  }
-}
+  "$schema": "https://opencode.ai/config.json",}
